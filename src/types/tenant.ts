@@ -135,6 +135,7 @@ export interface TeamMember {
   role: string;
   bio?: string;
   avatar?: string;
+  linkedinUrl?: string;
 }
 
 export interface TeamBlock {

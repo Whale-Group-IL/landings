@@ -13,6 +13,20 @@
   "placement": { "mode": "smart" },
   "workers_dev": true,
   "preview_urls": true,
+  // Custom domains — add one entry per tenant domain.
+  // The worker reads the Host header and fetches the matching KV config.
+  "routes": [
+    {
+      "pattern": "noplanculture.co.il",
+      "zone_name": "noplanculture.co.il",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.noplanculture.co.il",
+      "zone_name": "noplanculture.co.il",
+      "custom_domain": true
+    }
+  ],
   // KV namespace for tenant configs (hostname → JSON config)
   // Create with: wrangler kv namespace create TENANTS_KV
   "kv_namespaces": [

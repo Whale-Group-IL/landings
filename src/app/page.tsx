@@ -15,19 +15,21 @@ import { FinalCtaBlock } from '@/components/blocks/FinalCtaBlock';
 import { NotFound } from '@/components/NotFound';
 import type { Metadata } from 'next';
 
-export async function generateMetadata(): Promise<Metadata> {
+async function getConfig(): Promise<TenantConfig | null> {
   const headersList = await headers();
   const hostname = normalizeHostname(headersList.get('x-tenant-host') ?? '');
 
-  let config: TenantConfig | null = null;
   try {
     const ctx = await getCloudflareContext({ async: true });
     const kv = (ctx.env as any).TENANTS_KV ?? null;
-    config = await getTenantConfig(hostname, kv);
+    return await getTenantConfig(hostname, kv);
   } catch {
-    // local dev
+    return null;
   }
+}
 
+export async function generateMetadata(): Promise<Metadata> {
+  const config = await getConfig();
   if (!config) return { title: 'Coming Soon' };
 
   return {
@@ -43,59 +45,63 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function LandingPage() {
-  const headersList = await headers();
-  const hostname = normalizeHostname(headersList.get('x-tenant-host') ?? '');
+  const config = await getConfig();
 
-  let config: TenantConfig | null = null;
-  try {
-    const ctx = await getCloudflareContext({ async: true });
-    const kv = (ctx.env as any).TENANTS_KV ?? null;
-    config = await getTenantConfig(hostname, kv);
-  } catch {
-    // local dev — no KV
+  if (!config) {
+    const headersList = await headers();
+    const hostname = normalizeHostname(headersList.get('x-tenant-host') ?? '');
+    return <NotFound hostname={hostname} />;
   }
-
-  if (!config) return <NotFound hostname={hostname} />;
 
   const { blocks, mode, cta, crm, theme, strings } = config;
   const isExpert = mode === 'expert';
 
   return (
     <main>
+      {/* 1. Hook */}
       <HeroBlock data={blocks.hero} cta={cta} theme={theme} strings={strings} />
 
+      {/* 2. Problem awareness */}
       {isExpert && blocks.pains && (
         <PainsBlock data={blocks.pains} theme={theme} />
       )}
 
-      {isExpert && blocks.solution && (
-        <SolutionBlock data={blocks.solution} theme={theme} />
-      )}
-
+      {/* 3. Credibility (before the pitch) */}
       {isExpert && blocks.socialProof && (
         <SocialProofBlock data={blocks.socialProof} theme={theme} />
       )}
 
-      {isExpert && blocks.howItWorks && (
-        <HowItWorksBlock data={blocks.howItWorks} theme={theme} />
+      {/* 4. About / solution */}
+      {isExpert && blocks.solution && (
+        <SolutionBlock data={blocks.solution} theme={theme} />
       )}
 
+      {/* 5. Services / formats */}
       {isExpert && blocks.pricing && (
         <PricingBlock data={blocks.pricing} cta={cta} theme={theme} />
       )}
 
+      {/* 6. Process — how to start */}
+      {isExpert && blocks.howItWorks && (
+        <HowItWorksBlock data={blocks.howItWorks} theme={theme} />
+      )}
+
+      {/* 7. Social proof — testimonials */}
       {isExpert && blocks.testimonials && (
         <TestimonialsBlock data={blocks.testimonials} theme={theme} />
       )}
 
-      {isExpert && blocks.faq && (
-        <FaqBlock data={blocks.faq} theme={theme} />
-      )}
-
+      {/* 8. Who is behind this */}
       {isExpert && blocks.team && (
         <TeamBlock data={blocks.team} theme={theme} />
       )}
 
+      {/* 9. FAQ */}
+      {isExpert && blocks.faq && (
+        <FaqBlock data={blocks.faq} theme={theme} />
+      )}
+
+      {/* 10. Final CTA */}
       <FinalCtaBlock
         data={blocks.finalCta}
         cta={cta}
