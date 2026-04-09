@@ -1,10 +1,19 @@
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
-import { getCloudflareContext } from '@opennextjs/cloudflare';
 import { getTenantConfig, normalizeHostname } from '@/lib/tenant';
 import { sanitizeColor } from '@/lib/color';
 import { AnalyticsInit } from '@/components/analytics/AnalyticsInit';
 import './globals.css';
+
+async function getKV(): Promise<any> {
+  try {
+    const { getCloudflareContext } = await import('@opennextjs/cloudflare');
+    const ctx = await getCloudflareContext({ async: true });
+    return (ctx.env as any).TENANTS_KV ?? null;
+  } catch {
+    return null;
+  }
+}
 
 export const metadata: Metadata = {
   title: 'Landing',
@@ -19,13 +28,11 @@ export default async function RootLayout({
   const hostname = normalizeHostname(headersList.get('x-tenant-host') ?? '');
 
   let config = null;
-  try {
-    const ctx = await getCloudflareContext({ async: true });
-    const kv = (ctx.env as any).TENANTS_KV ?? null;
-    config = await getTenantConfig(hostname, kv);
-  } catch {
-    // local dev — no KV available
-  }
+  // In dev, skip KV (pass null) so getTenantConfig falls through to file fallback
+  const kv = process.env.NODE_ENV === 'production'
+    ? await getKV()
+    : null;
+  config = await getTenantConfig(hostname, kv);
 
   const lang = config?.meta.lang ?? 'he';
   const dir = config?.meta.dir ?? 'rtl';

@@ -1,5 +1,4 @@
 import { headers } from 'next/headers';
-import { getCloudflareContext } from '@opennextjs/cloudflare';
 import { getTenantConfig, normalizeHostname } from '@/lib/tenant';
 import type { TenantConfig } from '@/types/tenant';
 import { HeroBlock } from '@/components/blocks/HeroBlock';
@@ -15,17 +14,22 @@ import { FinalCtaBlock } from '@/components/blocks/FinalCtaBlock';
 import { NotFound } from '@/components/NotFound';
 import type { Metadata } from 'next';
 
-async function getConfig(): Promise<TenantConfig | null> {
-  const headersList = await headers();
-  const hostname = normalizeHostname(headersList.get('x-tenant-host') ?? '');
-
+async function getKV(): Promise<any> {
   try {
+    const { getCloudflareContext } = await import('@opennextjs/cloudflare');
     const ctx = await getCloudflareContext({ async: true });
-    const kv = (ctx.env as any).TENANTS_KV ?? null;
-    return await getTenantConfig(hostname, kv);
+    return (ctx.env as any).TENANTS_KV ?? null;
   } catch {
     return null;
   }
+}
+
+async function getConfig(): Promise<TenantConfig | null> {
+  const headersList = await headers();
+  const hostname = normalizeHostname(headersList.get('x-tenant-host') ?? '');
+  // In dev, pass null for kv so file fallback is used
+  const kv = process.env.NODE_ENV === 'production' ? await getKV() : null;
+  return await getTenantConfig(hostname, kv);
 }
 
 export async function generateMetadata(): Promise<Metadata> {

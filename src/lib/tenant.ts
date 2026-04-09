@@ -1,38 +1,68 @@
 import { cache } from 'react';
 import type { TenantConfig } from '@/types/tenant';
 
-/**
- * Normalize hostname: strip port and "www." prefix.
- */
-export function normalizeHostname(host: string): string {
-  return host.replace(/:\d+$/, '').replace(/^www\./, '');
-}
+// Re-export so existing imports from '@/lib/tenant' still work
+export { normalizeHostname } from '@/lib/hostname';
 
 /**
- * Fetch tenant config from Cloudflare KV using the hostname as the key.
+ * Fetch tenant config.
  *
- * Wrapped in React cache() so multiple server components in the same
- * request tree (layout + page) share a single KV read — no double fetch.
+ * Priority:
+ *   1. Cloudflare KV (production) — key = normalized hostname
+ *   2. Local file fallback (dev) — reads tenants/{hostname}.json,
+ *      then tenants/{TENANT_DEV_HOST}.json if hostname file not found
  *
- * KV key format: normalized hostname  e.g. "dentist-haifa.whaledigital.co.il"
- * KV value: JSON-serialized TenantConfig
+ * Wrapped in React cache() so layout + page share one read per request.
+ * NOTE: this file must NOT be imported by middleware (Edge Runtime).
+ *       Middleware imports normalizeHostname from @/lib/hostname instead.
  */
 export const getTenantConfig = cache(async (
   hostname: string,
   kv: KVNamespace | null
 ): Promise<TenantConfig | null> => {
-  if (!kv || !hostname) return null;
+  // ── Production: Cloudflare KV ────────────────────────────────────────────
+  if (kv && hostname) {
+    try {
+      const raw = await kv.get(hostname);
+      if (!raw) return null;
+      return JSON.parse(raw) as TenantConfig;
+    } catch {
+      return null;
+    }
+  }
+
+  // ── Local dev: read from tenants/ directory ──────────────────────────────
+  // Only runs in Node.js runtime (pages/layouts), never in Edge middleware.
+  if (process.env.NODE_ENV === 'production') return null;
 
   try {
-    const raw = await kv.get(hostname);
-    if (!raw) return null;
-    return JSON.parse(raw) as TenantConfig;
+    const { readFileSync } = await import('fs');
+    const { join } = await import('path');
+
+    const candidates = [
+      // Exact hostname match: "noplanculture.co.il" → tenants/noplanculture.co.il.json
+      join(process.cwd(), 'tenants', `${hostname}.json`),
+      // TENANT_DEV_HOST override: "noplanculture" → tenants/noplanculture.json
+      ...(process.env.TENANT_DEV_HOST
+        ? [join(process.cwd(), 'tenants', `${process.env.TENANT_DEV_HOST}.json`)]
+        : []),
+    ];
+
+    for (const filePath of candidates) {
+      try {
+        const raw = readFileSync(filePath, 'utf-8');
+        return JSON.parse(raw) as TenantConfig;
+      } catch {
+        // try next candidate
+      }
+    }
   } catch {
-    return null;
+    // fs unavailable
   }
+
+  return null;
 });
 
-// Minimal KVNamespace type — avoids importing the full wrangler package
 interface KVNamespace {
   get(key: string): Promise<string | null>;
   put(key: string, value: string): Promise<void>;

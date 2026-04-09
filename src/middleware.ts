@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { normalizeHostname } from '@/lib/tenant';
+import { normalizeHostname } from '@/lib/hostname';
 
 /**
  * Multi-tenant middleware.
