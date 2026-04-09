@@ -1,0 +1,176 @@
+export type LandingMode = 'bullet' | 'expert';
+export type CtaType = 'lead' | 'payment' | 'booking';
+export type Direction = 'ltr' | 'rtl';
+
+export interface TenantTheme {
+  primaryColor: string;
+  primaryColorHover?: string;
+  textColor?: string;
+  backgroundColor?: string;
+  fontFamily?: string;
+}
+
+export interface TenantMeta {
+  title: string;
+  description: string;
+  keywords?: string;
+  ogImage?: string;
+  favicon?: string;
+  lang: string;
+  dir: Direction;
+}
+
+export interface TenantAnalytics {
+  gaId?: string;
+  fbPixelId?: string;
+  posthogKey?: string;
+  posthogHost?: string;
+}
+
+export interface TenantCta {
+  type: CtaType;
+  calendlyUrl?: string;   // type: 'booking'
+  paymentUrl?: string;    // type: 'payment'
+  buttonText?: string;
+}
+
+export interface TenantCrm {
+  webhookUrl?: string;    // overrides env CRM_WEBHOOK_URL
+  source: string;         // e.g. "dentist-haifa-landing"
+  assignedTo?: string;    // agent/user ID in whalebizcrm
+}
+
+// ─── Block configs ────────────────────────────────────────────────────────────
+
+export interface HeroBlock {
+  headline: string;
+  subheadline: string;
+  ctaText: string;
+  imageSrc?: string;
+  imageAlt?: string;
+  badge?: string;
+}
+
+export interface PainItem {
+  title: string;
+  description: string;
+  icon?: string;
+}
+
+export interface PainsBlock {
+  title: string;
+  subtitle?: string;
+  items: PainItem[];
+}
+
+export interface SolutionBlock {
+  title: string;
+  subtitle?: string;
+  description: string;
+  imageSrc?: string;
+  imageAlt?: string;
+  points?: string[];
+}
+
+export interface SocialProofBlock {
+  title?: string;
+  stats: Array<{ value: string; label: string }>;
+  logos?: Array<{ src: string; alt: string }>;
+}
+
+export interface HowItWorksStep {
+  step: number;
+  title: string;
+  description: string;
+}
+
+export interface HowItWorksBlock {
+  title: string;
+  subtitle?: string;
+  steps: HowItWorksStep[];
+}
+
+export interface PricingPlan {
+  name: string;
+  price: string;
+  period?: string;
+  description?: string;
+  features: string[];
+  highlighted?: boolean;
+  ctaText?: string;
+}
+
+export interface PricingBlock {
+  title: string;
+  subtitle?: string;
+  plans: PricingPlan[];
+}
+
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+export interface FaqBlock {
+  title: string;
+  items: FaqItem[];
+}
+
+export interface Testimonial {
+  name: string;
+  role?: string;
+  company?: string;
+  text: string;
+  avatar?: string;
+  rating?: number;
+}
+
+export interface TestimonialsBlock {
+  title: string;
+  items: Testimonial[];
+}
+
+export interface TeamMember {
+  name: string;
+  role: string;
+  bio?: string;
+  avatar?: string;
+}
+
+export interface TeamBlock {
+  title?: string;
+  members: TeamMember[];
+}
+
+export interface FinalCtaBlock {
+  headline: string;
+  subheadline?: string;
+  ctaText: string;
+  note?: string;
+}
+
+export interface TenantBlocks {
+  hero: HeroBlock;
+  pains?: PainsBlock;
+  solution?: SolutionBlock;
+  socialProof?: SocialProofBlock;
+  howItWorks?: HowItWorksBlock;
+  pricing?: PricingBlock;
+  faq?: FaqBlock;
+  testimonials?: TestimonialsBlock;
+  team?: TeamBlock;
+  finalCta: FinalCtaBlock;
+}
+
+// ─── Root config ──────────────────────────────────────────────────────────────
+
+export interface TenantConfig {
+  tenantId: string;
+  mode: LandingMode;
+  meta: TenantMeta;
+  theme: TenantTheme;
+  analytics: TenantAnalytics;
+  cta: TenantCta;
+  crm: TenantCrm;
+  blocks: TenantBlocks;
+}

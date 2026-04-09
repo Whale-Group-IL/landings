@@ -1,0 +1,40 @@
+{
+  "tenantId": "saas-product-001",
+  "mode": "bullet",
+  "meta": {
+    "lang": "en",
+    "dir": "ltr",
+    "title": "ProductName — Automate your business in 5 minutes",
+    "description": "The fastest way to automate your workflow. No code, no complexity. Start free today.",
+    "keywords": "automation, no-code, workflow, SaaS"
+  },
+  "theme": {
+    "primaryColor": "#7c3aed",
+    "primaryColorHover": "#6d28d9"
+  },
+  "analytics": {
+    "gaId": "G-XXXXXXXXXX",
+    "fbPixelId": "XXXXXXXXXXXXXXX"
+  },
+  "cta": {
+    "type": "lead",
+    "buttonText": "Get Early Access"
+  },
+  "crm": {
+    "source": "saas-product-landing-en"
+  },
+  "blocks": {
+    "hero": {
+      "badge": "🚀 Now in Beta",
+      "headline": "Automate your business in 5 minutes — no code required",
+      "subheadline": "Connect your tools, trigger workflows, and save 10+ hours per week. Used by 500+ companies.",
+      "ctaText": "Get Early Access →"
+    },
+    "finalCta": {
+      "headline": "Ready to save 10 hours a week?",
+      "subheadline": "Join the waitlist. First 100 users get lifetime discount.",
+      "ctaText": "Join Waitlist",
+      "note": "No spam · Cancel anytime · Free forever plan available"
+    }
+  }
+}

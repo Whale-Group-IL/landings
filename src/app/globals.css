@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+:root {
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* RTL support */
+[dir="rtl"] {
+  font-family: 'Heebo', 'Arial Hebrew', sans-serif;
+}
+
+[dir="ltr"] {
+  font-family: 'Inter', 'Arial', sans-serif;
+}
