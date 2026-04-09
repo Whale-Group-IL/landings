@@ -29,6 +29,7 @@ export function AnalyticsInit({ analytics }: Props) {
       {gaId && (
         <>
           <Script
+            id="ga4-script"
             src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
             strategy="afterInteractive"
           />

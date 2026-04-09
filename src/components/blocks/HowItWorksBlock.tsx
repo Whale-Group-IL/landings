@@ -18,27 +18,28 @@ export function HowItWorksBlock({ data, theme }: Props) {
           </p>
         )}
 
-        <div className="space-y-8">
+        <div className="space-y-0">
           {data.steps.map((step, i) => (
             <div key={i} className="flex gap-6 items-start">
-              <div
-                className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg"
-                style={{ backgroundColor: theme.primaryColor }}
-              >
-                {step.step}
+              {/* Circle + vertical connector */}
+              <div className="flex flex-col items-center flex-shrink-0">
+                <div
+                  className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg"
+                  style={{ backgroundColor: theme.primaryColor }}
+                >
+                  {step.step}
+                </div>
+                {i < data.steps.length - 1 && (
+                  <div className="w-px flex-1 min-h-[2rem] bg-gray-200 my-1" />
+                )}
               </div>
-              <div className="flex-1 pt-2">
+
+              <div className={`flex-1 pt-2 ${i < data.steps.length - 1 ? 'pb-8' : ''}`}>
                 <h3 className="font-semibold text-lg text-gray-900 mb-1">
                   {step.title}
                 </h3>
                 <p className="text-gray-600">{step.description}</p>
               </div>
-              {i < data.steps.length - 1 && (
-                <div
-                  className="absolute ms-6 mt-12 w-px h-8 bg-gray-200"
-                  aria-hidden
-                />
-              )}
             </div>
           ))}
         </div>

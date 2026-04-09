@@ -57,12 +57,12 @@ export default async function LandingPage() {
 
   if (!config) return <NotFound hostname={hostname} />;
 
-  const { blocks, mode, cta, crm, theme } = config;
+  const { blocks, mode, cta, crm, theme, strings } = config;
   const isExpert = mode === 'expert';
 
   return (
     <main>
-      <HeroBlock data={blocks.hero} cta={cta} theme={theme} />
+      <HeroBlock data={blocks.hero} cta={cta} theme={theme} strings={strings} />
 
       {isExpert && blocks.pains && (
         <PainsBlock data={blocks.pains} theme={theme} />
@@ -102,6 +102,7 @@ export default async function LandingPage() {
         crm={crm}
         theme={theme}
         tenantId={config.tenantId}
+        strings={strings}
       />
     </main>
   );

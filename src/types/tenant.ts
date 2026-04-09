@@ -162,6 +162,15 @@ export interface TenantBlocks {
   finalCta: FinalCtaBlock;
 }
 
+// ─── UI strings (i18n) ───────────────────────────────────────────────────────
+
+export interface TenantStrings {
+  namePlaceholder?: string;    // default: "Full name"
+  phonePlaceholder?: string;   // default: "Phone"
+  submitSuccess?: string;      // default: "✓ Thank you! We'll be in touch soon."
+  submitError?: string;        // default: "Error submitting. Please try again."
+}
+
 // ─── Root config ──────────────────────────────────────────────────────────────
 
 export interface TenantConfig {
@@ -172,5 +181,6 @@ export interface TenantConfig {
   analytics: TenantAnalytics;
   cta: TenantCta;
   crm: TenantCrm;
+  strings?: TenantStrings;
   blocks: TenantBlocks;
 }

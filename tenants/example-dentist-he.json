@@ -27,6 +27,12 @@
     "source": "dentist-haifa-landing",
     "assignedTo": "agent-001"
   },
+  "strings": {
+    "namePlaceholder": "שם מלא",
+    "phonePlaceholder": "טלפון",
+    "submitSuccess": "✓ תודה! נחזור אליך תוך שעה.",
+    "submitError": "שגיאה בשליחה. נסה שוב."
+  },
   "blocks": {
     "hero": {
       "badge": "🦷 מרפאה מובילה בחיפה",

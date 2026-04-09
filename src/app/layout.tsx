@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import { getCloudflareContext } from '@opennextjs/cloudflare';
 import { getTenantConfig, normalizeHostname } from '@/lib/tenant';
+import { sanitizeColor } from '@/lib/color';
 import { AnalyticsInit } from '@/components/analytics/AnalyticsInit';
 import './globals.css';
 
@@ -28,7 +29,8 @@ export default async function RootLayout({
 
   const lang = config?.meta.lang ?? 'he';
   const dir = config?.meta.dir ?? 'rtl';
-  const primaryColor = config?.theme.primaryColor ?? '#2563eb';
+  // sanitizeColor prevents CSS injection if KV config is tampered with
+  const primaryColor = sanitizeColor(config?.theme.primaryColor, '#2563eb');
 
   return (
     <html lang={lang} dir={dir}>

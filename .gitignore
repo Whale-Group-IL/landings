@@ -18,6 +18,9 @@
 .DS_Store
 *.pem
 npm-debug.log*
+*.docx
+*.xlsx
+*.pdf
 
 # TypeScript
 *.tsbuildinfo

@@ -1,14 +1,15 @@
 import Image from 'next/image';
-import type { HeroBlock as HeroBlockData, TenantCta, TenantTheme } from '@/types/tenant';
+import type { HeroBlock as HeroBlockData, TenantCta, TenantStrings, TenantTheme } from '@/types/tenant';
 import { LeadFormInline } from '@/components/forms/LeadFormInline';
 
 interface Props {
   data: HeroBlockData;
   cta: TenantCta;
   theme: TenantTheme;
+  strings?: TenantStrings;
 }
 
-export function HeroBlock({ data, cta, theme }: Props) {
+export function HeroBlock({ data, cta, theme, strings }: Props) {
   return (
     <section className="min-h-[90vh] flex items-center bg-white px-4 py-16 md:py-24">
       <div className="max-w-5xl mx-auto w-full">
@@ -29,7 +30,7 @@ export function HeroBlock({ data, cta, theme }: Props) {
               {data.headline}
             </h1>
             <p className="text-lg text-gray-600 mb-8">{data.subheadline}</p>
-            <LeadFormInline ctaText={data.ctaText} cta={cta} theme={theme} />
+            <LeadFormInline ctaText={data.ctaText} cta={cta} theme={theme} strings={strings} />
           </div>
 
           {data.imageSrc && (

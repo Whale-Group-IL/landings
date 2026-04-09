@@ -1,4 +1,4 @@
-import type { FinalCtaBlock as FinalCtaBlockData, TenantCta, TenantCrm, TenantTheme } from '@/types/tenant';
+import type { FinalCtaBlock as FinalCtaBlockData, TenantCta, TenantCrm, TenantStrings, TenantTheme } from '@/types/tenant';
 import { LeadFormInline } from '@/components/forms/LeadFormInline';
 
 interface Props {
@@ -7,9 +7,10 @@ interface Props {
   crm: TenantCrm;
   theme: TenantTheme;
   tenantId: string;
+  strings?: TenantStrings;
 }
 
-export function FinalCtaBlock({ data, cta, crm, theme, tenantId }: Props) {
+export function FinalCtaBlock({ data, cta, crm, theme, tenantId, strings }: Props) {
   return (
     <section
       className="py-16 md:py-24 px-4 text-white"
@@ -29,6 +30,7 @@ export function FinalCtaBlock({ data, cta, crm, theme, tenantId }: Props) {
           crm={crm}
           tenantId={tenantId}
           theme={theme}
+          strings={strings}
           variant="inverted"
         />
 

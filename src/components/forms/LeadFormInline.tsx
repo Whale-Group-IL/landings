@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useTransition } from 'react';
-import type { TenantCta, TenantCrm, TenantTheme } from '@/types/tenant';
+import type { TenantCta, TenantCrm, TenantStrings, TenantTheme } from '@/types/tenant';
 import { trackLead } from '@/components/analytics/AnalyticsInit';
 
 interface Props {
@@ -10,6 +10,7 @@ interface Props {
   crm?: TenantCrm;
   tenantId?: string;
   theme: TenantTheme;
+  strings?: TenantStrings;
   variant?: 'primary' | 'inverted';
 }
 
@@ -19,9 +20,9 @@ export function LeadFormInline({
   crm,
   tenantId,
   theme,
+  strings,
   variant = 'primary',
 }: Props) {
-  // For booking/payment types, just show a button
   if (cta.type === 'booking' && cta.calendlyUrl) {
     return (
       <a
@@ -64,6 +65,7 @@ export function LeadFormInline({
       crm={crm}
       tenantId={tenantId}
       theme={theme}
+      strings={strings}
       variant={variant}
     />
   );
@@ -74,20 +76,26 @@ interface LeadFormProps {
   crm?: TenantCrm;
   tenantId?: string;
   theme: TenantTheme;
+  strings?: TenantStrings;
   variant: 'primary' | 'inverted';
 }
 
-function LeadForm({ ctaText, crm, tenantId, theme, variant }: LeadFormProps) {
+function LeadForm({ ctaText, crm, tenantId, theme, strings, variant }: LeadFormProps) {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
   const [isPending, startTransition] = useTransition();
 
+  const namePlaceholder = strings?.namePlaceholder ?? 'Full name';
+  const phonePlaceholder = strings?.phonePlaceholder ?? 'Phone';
+  const successMsg = strings?.submitSuccess ?? '✓ Thank you! We\'ll be in touch soon.';
+  const errorMsg = strings?.submitError ?? 'Error submitting. Please try again.';
+
   const inputClass =
     'w-full px-4 py-3 rounded-xl border text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 text-sm';
 
-  async function handleSubmit(e: React.FormEvent) {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError('');
 
@@ -97,11 +105,11 @@ function LeadForm({ ctaText, crm, tenantId, theme, variant }: LeadFormProps) {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            name,
-            phone,
+            name: name.trim(),
+            phone: phone.trim(),
             tenantId: tenantId ?? 'unknown',
             source: crm?.source ?? 'landing',
-            webhookUrl: crm?.webhookUrl,
+            // webhookUrl is intentionally omitted — resolved server-side only
           }),
         });
 
@@ -110,7 +118,7 @@ function LeadForm({ ctaText, crm, tenantId, theme, variant }: LeadFormProps) {
         trackLead({ tenantId: tenantId ?? '', source: crm?.source ?? '' });
         setSubmitted(true);
       } catch {
-        setError('שגיאה בשליחה. נסה שוב.');
+        setError(errorMsg);
       }
     });
   }
@@ -119,13 +127,12 @@ function LeadForm({ ctaText, crm, tenantId, theme, variant }: LeadFormProps) {
     return (
       <div
         className={`text-center py-4 px-6 rounded-xl font-semibold ${
-          variant === 'inverted'
-            ? 'bg-white/20 text-white'
-            : 'text-white'
+          variant === 'inverted' ? 'text-white' : 'text-white'
         }`}
-        style={variant !== 'inverted' ? { backgroundColor: theme.primaryColor } : {}}
+        style={{ backgroundColor: variant === 'inverted' ? 'rgba(255,255,255,0.2)' : theme.primaryColor }}
+        role="status"
       >
-        ✓ תודה! נחזור אליך בקרוב.
+        {successMsg}
       </div>
     );
   }
@@ -134,7 +141,7 @@ function LeadForm({ ctaText, crm, tenantId, theme, variant }: LeadFormProps) {
     <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md">
       <input
         type="text"
-        placeholder="שם מלא"
+        placeholder={namePlaceholder}
         value={name}
         onChange={(e) => setName(e.target.value)}
         required
@@ -143,7 +150,7 @@ function LeadForm({ ctaText, crm, tenantId, theme, variant }: LeadFormProps) {
       />
       <input
         type="tel"
-        placeholder="טלפון"
+        placeholder={phonePlaceholder}
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
         required
@@ -160,10 +167,10 @@ function LeadForm({ ctaText, crm, tenantId, theme, variant }: LeadFormProps) {
             : { backgroundColor: theme.primaryColor, color: 'white' }
         }
       >
-        {isPending ? '...' : ctaText}
+        {isPending ? '…' : ctaText}
       </button>
       {error && (
-        <p className="text-red-400 text-xs mt-1 sm:col-span-3">{error}</p>
+        <p className="text-red-400 text-xs mt-1" role="alert">{error}</p>
       )}
     </form>
   );
