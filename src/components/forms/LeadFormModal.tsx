@@ -18,7 +18,7 @@ export function LeadFormModal({ ctaText, cta, theme, variant = 'primary' }: Prop
     <>
       <button
         onClick={() => setOpen(true)}
-        className="w-full px-6 py-3 rounded-xl font-bold text-sm transition-opacity hover:opacity-90"
+        className="w-full px-6 py-3.5 rounded-xl font-bold text-sm shadow-sm hover:shadow-md hover:opacity-90"
         style={
           variant === 'inverted'
             ? { backgroundColor: 'white', color: theme.primaryColor }
@@ -30,7 +30,8 @@ export function LeadFormModal({ ctaText, cta, theme, variant = 'primary' }: Prop
 
       {open && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          style={{ backgroundColor: 'rgba(0,0,0,0.55)' }}
           onClick={() => setOpen(false)}
         >
           <div
@@ -38,10 +39,11 @@ export function LeadFormModal({ ctaText, cta, theme, variant = 'primary' }: Prop
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-between items-center mb-6">
-              <h3 className="text-xl font-bold text-gray-900">{ctaText}</h3>
+              <h3 className="text-lg font-bold text-gray-900">{ctaText}</h3>
               <button
                 onClick={() => setOpen(false)}
-                className="text-gray-400 hover:text-gray-600 text-2xl leading-none"
+                className="w-8 h-8 rounded-full flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 text-xl leading-none"
+                aria-label="Close"
               >
                 ×
               </button>

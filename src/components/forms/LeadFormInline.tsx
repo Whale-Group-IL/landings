@@ -29,7 +29,7 @@ export function LeadFormInline({
         href={cta.calendlyUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-block px-8 py-4 rounded-xl font-bold text-lg transition-opacity hover:opacity-90"
+        className="inline-block px-8 py-4 rounded-xl font-bold text-base shadow-sm hover:shadow-md hover:opacity-90"
         style={
           variant === 'inverted'
             ? { backgroundColor: 'white', color: theme.primaryColor }
@@ -47,7 +47,7 @@ export function LeadFormInline({
         href={cta.paymentUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-block px-8 py-4 rounded-xl font-bold text-lg transition-opacity hover:opacity-90"
+        className="inline-block px-8 py-4 rounded-xl font-bold text-base shadow-sm hover:shadow-md hover:opacity-90"
         style={
           variant === 'inverted'
             ? { backgroundColor: 'white', color: theme.primaryColor }
@@ -89,11 +89,18 @@ function LeadForm({ ctaText, crm, tenantId, theme, strings, variant }: LeadFormP
 
   const namePlaceholder = strings?.namePlaceholder ?? 'Full name';
   const phonePlaceholder = strings?.phonePlaceholder ?? 'Phone';
-  const successMsg = strings?.submitSuccess ?? '✓ Thank you! We\'ll be in touch soon.';
+  const successMsg = strings?.submitSuccess ?? "✓ Thank you! We'll be in touch soon.";
   const errorMsg = strings?.submitError ?? 'Error submitting. Please try again.';
 
-  const inputClass =
-    'w-full px-4 py-3 rounded-xl border text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 text-sm';
+  const isInverted = variant === 'inverted';
+
+  const inputClass = [
+    'w-full px-4 py-3.5 rounded-xl text-sm',
+    'placeholder:text-gray-400 focus:outline-none focus:ring-2',
+    isInverted
+      ? 'bg-white/10 border border-white/25 text-white placeholder:text-white/50 focus:ring-white/40'
+      : 'bg-white border border-gray-200 text-gray-900 focus:ring-2 focus:border-transparent shadow-sm',
+  ].join(' ');
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -126,10 +133,10 @@ function LeadForm({ ctaText, crm, tenantId, theme, strings, variant }: LeadFormP
   if (submitted) {
     return (
       <div
-        className={`text-center py-4 px-6 rounded-xl font-semibold ${
-          variant === 'inverted' ? 'text-white' : 'text-white'
+        className={`text-center py-4 px-8 rounded-xl font-semibold ${
+          isInverted ? 'bg-white/20 text-white' : 'text-white'
         }`}
-        style={{ backgroundColor: variant === 'inverted' ? 'rgba(255,255,255,0.2)' : theme.primaryColor }}
+        style={!isInverted ? { backgroundColor: theme.primaryColor } : {}}
         role="status"
       >
         {successMsg}
@@ -138,40 +145,58 @@ function LeadForm({ ctaText, crm, tenantId, theme, strings, variant }: LeadFormP
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md">
-      <input
-        type="text"
-        placeholder={namePlaceholder}
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        required
-        className={inputClass}
-        style={{ borderColor: variant === 'inverted' ? 'rgba(255,255,255,0.3)' : '#e5e7eb' }}
-      />
-      <input
-        type="tel"
-        placeholder={phonePlaceholder}
-        value={phone}
-        onChange={(e) => setPhone(e.target.value)}
-        required
-        className={inputClass}
-        style={{ borderColor: variant === 'inverted' ? 'rgba(255,255,255,0.3)' : '#e5e7eb' }}
-      />
-      <button
-        type="submit"
-        disabled={isPending}
-        className="flex-shrink-0 px-6 py-3 rounded-xl font-bold text-sm transition-opacity hover:opacity-90 disabled:opacity-60 whitespace-nowrap"
-        style={
-          variant === 'inverted'
-            ? { backgroundColor: 'white', color: theme.primaryColor }
-            : { backgroundColor: theme.primaryColor, color: 'white' }
-        }
+    <div className="w-full max-w-lg">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col sm:flex-row gap-2.5"
       >
-        {isPending ? '…' : ctaText}
-      </button>
+        <input
+          type="text"
+          placeholder={namePlaceholder}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+          className={inputClass}
+          style={
+            !isInverted
+              ? { '--tw-ring-color': theme.primaryColor } as React.CSSProperties
+              : {}
+          }
+        />
+        <input
+          type="tel"
+          placeholder={phonePlaceholder}
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          required
+          className={inputClass}
+          style={
+            !isInverted
+              ? { '--tw-ring-color': theme.primaryColor } as React.CSSProperties
+              : {}
+          }
+        />
+        <button
+          type="submit"
+          disabled={isPending}
+          className="flex-shrink-0 px-7 py-3.5 rounded-xl font-bold text-sm whitespace-nowrap shadow-sm hover:shadow-md hover:opacity-90 disabled:opacity-60"
+          style={
+            isInverted
+              ? { backgroundColor: 'white', color: theme.primaryColor }
+              : { backgroundColor: theme.primaryColor, color: 'white' }
+          }
+        >
+          {isPending ? '…' : ctaText}
+        </button>
+      </form>
       {error && (
-        <p className="text-red-400 text-xs mt-1" role="alert">{error}</p>
+        <p
+          className={`text-xs mt-2 ${isInverted ? 'text-white/70' : 'text-red-500'}`}
+          role="alert"
+        >
+          {error}
+        </p>
       )}
-    </form>
+    </div>
   );
 }

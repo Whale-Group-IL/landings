@@ -9,64 +9,93 @@ interface Props {
 
 export function PricingBlock({ data, cta, theme }: Props) {
   return (
-    <section className="py-16 md:py-24 bg-gray-50 px-4">
+    <section className="py-24 md:py-32 bg-gray-50 px-4">
       <div className="max-w-5xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-3">
-          {data.title}
-        </h2>
-        {data.subtitle && (
-          <p className="text-center text-gray-500 mb-12 max-w-xl mx-auto">
-            {data.subtitle}
-          </p>
-        )}
+        <div className="text-center max-w-2xl mx-auto mb-14">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">
+            {data.title}
+          </h2>
+          {data.subtitle && (
+            <p className="text-lg text-gray-500 leading-relaxed">{data.subtitle}</p>
+          )}
+        </div>
 
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 items-start">
           {data.plans.map((plan, i) => (
             <div
               key={i}
-              className={`rounded-2xl p-6 flex flex-col ${
-                plan.highlighted
-                  ? 'shadow-xl text-white'
-                  : 'bg-white shadow-sm border border-gray-100'
+              className={`relative rounded-2xl p-8 flex flex-col ${
+                plan.highlighted ? 'text-white' : 'bg-white border border-gray-100 shadow-sm'
               }`}
               style={
-                plan.highlighted ? { backgroundColor: theme.primaryColor } : {}
+                plan.highlighted
+                  ? {
+                      backgroundColor: theme.primaryColor,
+                      boxShadow: `0 0 0 2px ${theme.primaryColor}, 0 20px 60px ${theme.primaryColor}38`,
+                    }
+                  : {}
               }
             >
-              <div className="mb-4">
+              {plan.highlighted && (
+                <div className="absolute -top-3.5 start-1/2 -translate-x-1/2">
+                  <span
+                    className="bg-white text-xs font-bold px-3.5 py-1.5 rounded-full shadow-sm whitespace-nowrap"
+                    style={{ color: theme.primaryColor }}
+                  >
+                    ★ Most popular
+                  </span>
+                </div>
+              )}
+
+              <div className="mb-7">
                 <p
-                  className={`text-sm font-semibold uppercase tracking-wide mb-1 ${
-                    plan.highlighted ? 'text-white/70' : 'text-gray-500'
+                  className={`text-xs font-bold uppercase tracking-wider mb-3 ${
+                    plan.highlighted ? 'text-white/60' : 'text-gray-400'
                   }`}
                 >
                   {plan.name}
                 </p>
-                <div className="flex items-baseline gap-1">
+                <div className="flex items-baseline gap-1 mb-2">
                   <span className="text-4xl font-extrabold">{plan.price}</span>
                   {plan.period && (
-                    <span className={`text-sm ${plan.highlighted ? 'text-white/70' : 'text-gray-500'}`}>
+                    <span
+                      className={`text-sm ${plan.highlighted ? 'text-white/60' : 'text-gray-400'}`}
+                    >
                       /{plan.period}
                     </span>
                   )}
                 </div>
                 {plan.description && (
-                  <p className={`text-sm mt-2 ${plan.highlighted ? 'text-white/80' : 'text-gray-500'}`}>
+                  <p
+                    className={`text-sm leading-relaxed ${
+                      plan.highlighted ? 'text-white/70' : 'text-gray-500'
+                    }`}
+                  >
                     {plan.description}
                   </p>
                 )}
               </div>
 
-              <ul className="space-y-2 flex-1 mb-6">
+              <ul className="space-y-3 flex-1 mb-8">
                 {plan.features.map((f, j) => (
-                  <li key={j} className="flex items-start gap-2 text-sm">
-                    <span className={plan.highlighted ? 'text-white' : ''} style={!plan.highlighted ? { color: theme.primaryColor } : {}}>✓</span>
-                    <span className={plan.highlighted ? 'text-white/90' : 'text-gray-700'}>{f}</span>
+                  <li key={j} className="flex items-start gap-2.5 text-sm">
+                    <span
+                      className={`mt-0.5 flex-shrink-0 font-bold ${
+                        plan.highlighted ? 'text-white/80' : ''
+                      }`}
+                      style={!plan.highlighted ? { color: theme.primaryColor } : {}}
+                    >
+                      ✓
+                    </span>
+                    <span className={plan.highlighted ? 'text-white/90' : 'text-gray-600'}>
+                      {f}
+                    </span>
                   </li>
                 ))}
               </ul>
 
               <LeadFormModal
-                ctaText={plan.ctaText ?? cta.buttonText ?? 'בחר תכנית'}
+                ctaText={plan.ctaText ?? cta.buttonText ?? 'Choose plan'}
                 cta={cta}
                 theme={theme}
                 variant={plan.highlighted ? 'inverted' : 'primary'}
