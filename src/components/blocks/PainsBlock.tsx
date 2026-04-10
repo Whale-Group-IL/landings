@@ -18,7 +18,15 @@ export function PainsBlock({ data, theme }: Props) {
           )}
         </div>
 
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
+        <div
+          className={`grid gap-5 ${
+            data.items.length === 4
+              ? 'sm:grid-cols-2'
+              : data.items.length === 3
+              ? 'sm:grid-cols-3'
+              : 'sm:grid-cols-2 md:grid-cols-3'
+          }`}
+        >
           {data.items.map((item, i) => (
             <div
               key={i}

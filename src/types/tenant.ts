@@ -103,6 +103,7 @@ export interface PricingPlan {
 export interface PricingBlock {
   title: string;
   subtitle?: string;
+  popularLabel?: string;   // badge text on highlighted card; default: "★ Популярный выбор"
   plans: PricingPlan[];
 }
 

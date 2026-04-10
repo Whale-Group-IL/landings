@@ -20,7 +20,7 @@ export function PricingBlock({ data, cta, theme }: Props) {
           )}
         </div>
 
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 items-start">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 items-stretch">
           {data.plans.map((plan, i) => (
             <div
               key={i}
@@ -42,7 +42,7 @@ export function PricingBlock({ data, cta, theme }: Props) {
                     className="bg-white text-xs font-bold px-3.5 py-1.5 rounded-full shadow-sm whitespace-nowrap"
                     style={{ color: theme.primaryColor }}
                   >
-                    ★ Most popular
+                    {data.popularLabel ?? '★ Популярный выбор'}
                   </span>
                 </div>
               )}
@@ -55,11 +55,11 @@ export function PricingBlock({ data, cta, theme }: Props) {
                 >
                   {plan.name}
                 </p>
-                <div className="flex items-baseline gap-1 mb-2">
-                  <span className="text-4xl font-extrabold">{plan.price}</span>
+                <div className="mb-2">
+                  <span className="text-2xl font-extrabold leading-tight">{plan.price}</span>
                   {plan.period && (
                     <span
-                      className={`text-sm ${plan.highlighted ? 'text-white/60' : 'text-gray-400'}`}
+                      className={`text-sm ms-1 ${plan.highlighted ? 'text-white/60' : 'text-gray-400'}`}
                     >
                       /{plan.period}
                     </span>
