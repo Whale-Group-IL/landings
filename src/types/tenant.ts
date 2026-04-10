@@ -150,10 +150,38 @@ export interface FinalCtaBlock {
   note?: string;
 }
 
+export interface FeatureItem {
+  title: string;
+  description: string;
+  icon?: string;
+}
+
+export interface FeaturesBlock {
+  title: string;
+  subtitle?: string;
+  items: FeatureItem[];
+}
+
+export interface AudienceSegment {
+  title: string;
+  description: string;
+  icon?: string;
+}
+
+export interface AudienceBlock {
+  title: string;
+  subtitle?: string;
+  segments: AudienceSegment[];
+  notForTitle?: string;
+  notFor?: string[];
+}
+
 export interface TenantBlocks {
   hero: HeroBlock;
   pains?: PainsBlock;
   solution?: SolutionBlock;
+  features?: FeaturesBlock;
+  audience?: AudienceBlock;
   socialProof?: SocialProofBlock;
   howItWorks?: HowItWorksBlock;
   pricing?: PricingBlock;

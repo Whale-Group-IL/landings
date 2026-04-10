@@ -1,0 +1,68 @@
+{
+  "tenantId": "_template-bullet-he",
+  "mode": "bullet",
+  "meta": {
+    "title": "כותרת הדף | המותג שלך",
+    "description": "תיאור קצר לSEO ו-Open Graph (150–160 תווים). מה אתם עושים ולמי.",
+    "keywords": "מילת מפתח, עוד אחת, שאילתה ממוקדת",
+    "lang": "he",
+    "dir": "rtl"
+  },
+  "theme": {
+    "primaryColor": "#2563eb"
+  },
+  "analytics": {
+    "gaId": "",
+    "fbPixelId": "",
+    "posthogKey": ""
+  },
+  "cta": {
+    "type": "lead",
+    "buttonText": "השאר פרטים"
+  },
+  "crm": {
+    "source": "שם-הלנדינג",
+    "assignedTo": ""
+  },
+  "strings": {
+    "namePlaceholder": "שם מלא",
+    "phonePlaceholder": "טלפון",
+    "submitSuccess": "✓ תודה! ניצור איתך קשר בקרוב.",
+    "submitError": "שגיאה בשליחה. נסה שוב."
+  },
+  "blocks": {
+    "hero": {
+      "headline": "כותרת ראשית — הבטחה אחת חזקה",
+      "subheadline": "משפט הבהרה: למי עוזרים, איזה תוצאה, בכמה זמן או במחיר.",
+      "ctaText": "רוצה תוצאה ←",
+      "badge": "תג אמון: «50+ לקוחות» או «פעילים מ-2018»"
+    },
+    "howItWorks": {
+      "title": "איך זה עובד",
+      "subtitle": "שלושה שלבים פשוטים לתוצאה",
+      "steps": [
+        {
+          "step": 1,
+          "title": "שלב ראשון",
+          "description": "תארו את הפעולה הראשונה של הלקוח. פשוט וברור."
+        },
+        {
+          "step": 2,
+          "title": "שלב שני",
+          "description": "מה קורה אחרי? התפקיד שלכם בתהליך."
+        },
+        {
+          "step": 3,
+          "title": "התוצאה",
+          "description": "מה הלקוח מקבל, מרגיש, או יכול לעשות."
+        }
+      ]
+    },
+    "finalCta": {
+      "headline": "מוכנים להתחיל?",
+      "subheadline": "השאירו פרטים — נחזור תוך שעה.",
+      "ctaText": "השאר פרטים",
+      "note": "ללא התחייבות. ייעוץ ראשוני ללא עלות."
+    }
+  }
+}

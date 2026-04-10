@@ -1,0 +1,279 @@
+{
+  "tenantId": "_template-expert-en",
+  "mode": "expert",
+  "meta": {
+    "title": "PAGE TITLE | Your Brand",
+    "description": "Short SEO and Open Graph description (150–160 chars). What you do and for whom.",
+    "keywords": "keyword, another one, niche query",
+    "lang": "en",
+    "dir": "ltr"
+  },
+  "theme": {
+    "primaryColor": "#111827"
+  },
+  "analytics": {
+    "gaId": "",
+    "fbPixelId": "",
+    "posthogKey": ""
+  },
+  "cta": {
+    "type": "lead",
+    "buttonText": "Get started"
+  },
+  "crm": {
+    "source": "landing-name",
+    "assignedTo": ""
+  },
+  "strings": {
+    "namePlaceholder": "Your name",
+    "phonePlaceholder": "Phone number",
+    "submitSuccess": "✓ Thank you! We'll be in touch shortly.",
+    "submitError": "Error submitting. Please try again."
+  },
+  "blocks": {
+    "hero": {
+      "headline": "HEADLINE — one strong promise",
+      "subheadline": "Clarifying line: who you help, what result, in how long or at what cost.",
+      "ctaText": "I want results →",
+      "badge": "Trust badge: «50+ clients» or «Since 2018»"
+    },
+    "pains": {
+      "title": "Does this sound familiar?",
+      "subtitle": "The problems your clients come to you with",
+      "items": [
+        {
+          "icon": "😩",
+          "title": "Pain 1",
+          "description": "Describe a specific problem in the client's language. The more precise, the better."
+        },
+        {
+          "icon": "😤",
+          "title": "Pain 2",
+          "description": "Second pain. What's blocking them from moving forward right now?"
+        },
+        {
+          "icon": "😰",
+          "title": "Pain 3",
+          "description": "Fear or risk. What are they afraid of if nothing changes?"
+        }
+      ]
+    },
+    "socialProof": {
+      "title": "By the numbers",
+      "stats": [
+        { "value": "100+", "label": "Clients" },
+        { "value": "5 years", "label": "In business" },
+        { "value": "98%", "label": "Satisfaction rate" }
+      ]
+    },
+    "solution": {
+      "title": "Our approach",
+      "subtitle": "Why it works",
+      "description": "Describe your methodology or unique approach. What's fundamentally different about you? What do you do differently?",
+      "points": [
+        "Key advantage 1 — specific benefit",
+        "Key advantage 2 — specific benefit",
+        "Key advantage 3 — specific benefit"
+      ]
+    },
+    "features": {
+      "title": "What's included",
+      "subtitle": "Specific actions we take",
+      "items": [
+        {
+          "icon": "📞",
+          "title": "Feature 1",
+          "description": "What exactly is done. Concrete, no fluff."
+        },
+        {
+          "icon": "📝",
+          "title": "Feature 2",
+          "description": "What exactly is done. Concrete, no fluff."
+        },
+        {
+          "icon": "📊",
+          "title": "Feature 3",
+          "description": "What exactly is done. Concrete, no fluff."
+        },
+        {
+          "icon": "🔔",
+          "title": "Feature 4",
+          "description": "What exactly is done. Concrete, no fluff."
+        },
+        {
+          "icon": "💬",
+          "title": "Feature 5",
+          "description": "What exactly is done. Concrete, no fluff."
+        },
+        {
+          "icon": "📈",
+          "title": "Feature 6",
+          "description": "What exactly is done. Concrete, no fluff."
+        }
+      ]
+    },
+    "audience": {
+      "title": "Who this is for",
+      "subtitle": "We work with people who...",
+      "segments": [
+        {
+          "icon": "👔",
+          "title": "Segment 1",
+          "description": "Describe a niche or client type. More specific is better."
+        },
+        {
+          "icon": "🏢",
+          "title": "Segment 2",
+          "description": "Describe a niche or client type. More specific is better."
+        },
+        {
+          "icon": "🚀",
+          "title": "Segment 3",
+          "description": "Describe a niche or client type. More specific is better."
+        }
+      ],
+      "notForTitle": "Not for people who:",
+      "notFor": [
+        "Want one-off help without systematic work",
+        "Are not ready to invest in growth",
+        "Expect results without their own involvement"
+      ]
+    },
+    "pricing": {
+      "title": "Engagement formats",
+      "subtitle": "Choose what fits",
+      "plans": [
+        {
+          "name": "Starter",
+          "price": "$0,000",
+          "period": "month",
+          "description": "For those just getting started",
+          "features": [
+            "What's included 1",
+            "What's included 2",
+            "What's included 3"
+          ],
+          "highlighted": false,
+          "ctaText": "Choose"
+        },
+        {
+          "name": "Pro",
+          "price": "$0,000",
+          "period": "month",
+          "description": "The optimal choice for most",
+          "features": [
+            "Everything in Starter",
+            "Add-on 1",
+            "Add-on 2",
+            "Add-on 3"
+          ],
+          "highlighted": true,
+          "ctaText": "Get started →"
+        },
+        {
+          "name": "Enterprise",
+          "price": "Custom",
+          "description": "For larger engagements",
+          "features": [
+            "Everything in Pro",
+            "Option 1",
+            "Option 2",
+            "Priority support"
+          ],
+          "highlighted": false,
+          "ctaText": "Let's talk"
+        }
+      ]
+    },
+    "howItWorks": {
+      "title": "How we work together",
+      "subtitle": "From first contact to results",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Discovery",
+          "description": "Enquiry → call → understand the task and goals."
+        },
+        {
+          "step": 2,
+          "title": "Diagnosis",
+          "description": "Analyse the situation, identify growth opportunities."
+        },
+        {
+          "step": 3,
+          "title": "Execution",
+          "description": "Carry out the plan, keep you updated at every step."
+        },
+        {
+          "step": 4,
+          "title": "Results",
+          "description": "Record goal achievement and build the next roadmap together."
+        }
+      ]
+    },
+    "testimonials": {
+      "title": "What clients say",
+      "items": [
+        {
+          "name": "First Last",
+          "role": "Title",
+          "company": "Company",
+          "text": "Client testimonial in their own words. The more specific the result, the more convincing. Add numbers or facts if available.",
+          "rating": 5
+        },
+        {
+          "name": "First Last",
+          "role": "Title",
+          "company": "Company",
+          "text": "Second testimonial. Ideally from a different segment or with a different outcome.",
+          "rating": 5
+        },
+        {
+          "name": "First Last",
+          "role": "Title",
+          "company": "Company",
+          "text": "Third testimonial. Different narratives increase credibility.",
+          "rating": 5
+        }
+      ]
+    },
+    "team": {
+      "title": "The people behind this",
+      "members": [
+        {
+          "name": "First Last",
+          "role": "Title / area",
+          "bio": "2–3 sentences: experience, expertise, why you can be trusted. A personal fact builds rapport.",
+          "linkedinUrl": ""
+        }
+      ]
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "items": [
+        {
+          "question": "How quickly will I see results?",
+          "answer": "Answer honestly. Specific timelines beat vague promises."
+        },
+        {
+          "question": "How does the process work?",
+          "answer": "Describe the format: online/offline, meeting frequency, communication."
+        },
+        {
+          "question": "What if it's not a fit?",
+          "answer": "Refund policy or guarantees. Address the main objection."
+        },
+        {
+          "question": "How much time does it require from my side?",
+          "answer": "Honest answer about the client's involvement."
+        }
+      ]
+    },
+    "finalCta": {
+      "headline": "Ready to get started?",
+      "subheadline": "Leave your details — we'll get back to you within an hour.",
+      "ctaText": "Get started",
+      "note": "No commitment. First consultation is free."
+    }
+  }
+}

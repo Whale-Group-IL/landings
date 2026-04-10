@@ -1,0 +1,68 @@
+{
+  "tenantId": "_template-bullet-en",
+  "mode": "bullet",
+  "meta": {
+    "title": "PAGE TITLE | Your Brand",
+    "description": "Short SEO and Open Graph description (150–160 chars). What you do and for whom.",
+    "keywords": "keyword, another one, niche query",
+    "lang": "en",
+    "dir": "ltr"
+  },
+  "theme": {
+    "primaryColor": "#2563eb"
+  },
+  "analytics": {
+    "gaId": "",
+    "fbPixelId": "",
+    "posthogKey": ""
+  },
+  "cta": {
+    "type": "lead",
+    "buttonText": "Get started"
+  },
+  "crm": {
+    "source": "landing-name",
+    "assignedTo": ""
+  },
+  "strings": {
+    "namePlaceholder": "Your name",
+    "phonePlaceholder": "Phone number",
+    "submitSuccess": "✓ Thank you! We'll be in touch shortly.",
+    "submitError": "Error submitting. Please try again."
+  },
+  "blocks": {
+    "hero": {
+      "headline": "HEADLINE — one strong promise",
+      "subheadline": "Clarifying line: who you help, what result, in how long or at what cost.",
+      "ctaText": "I want results →",
+      "badge": "Trust badge: «50+ clients» or «Since 2018»"
+    },
+    "howItWorks": {
+      "title": "How it works",
+      "subtitle": "Three simple steps to results",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Step one",
+          "description": "Describe the first action the client takes. Keep it simple and concrete."
+        },
+        {
+          "step": 2,
+          "title": "Step two",
+          "description": "What happens next? Your role or the process."
+        },
+        {
+          "step": 3,
+          "title": "Result",
+          "description": "The end outcome. What the client gets, feels, or can now do."
+        }
+      ]
+    },
+    "finalCta": {
+      "headline": "Ready to get started?",
+      "subheadline": "Leave your details — we'll get back to you within an hour.",
+      "ctaText": "Get started",
+      "note": "No commitment. First consultation is free."
+    }
+  }
+}
