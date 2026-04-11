@@ -13,20 +13,9 @@
   "placement": { "mode": "smart" },
   "workers_dev": true,
   "preview_urls": true,
-  // Custom domains — add one entry per tenant domain.
-  // The worker reads the Host header and fetches the matching KV config.
-  "routes": [
-    {
-      "pattern": "noplanculture.co.il",
-      "zone_name": "noplanculture.co.il",
-      "custom_domain": true
-    },
-    {
-      "pattern": "www.noplanculture.co.il",
-      "zone_name": "noplanculture.co.il",
-      "custom_domain": true
-    }
-  ],
+  // Custom domains are bound via the Cloudflare API (not wrangler.jsonc) to avoid
+  // deploy failures when DNS records already exist. Use the API call in ops-playbook.md.
+  // Currently bound: noplanculture.co.il, www.noplanculture.co.il
   // KV namespace for tenant configs (hostname → JSON config)
   // Create with: wrangler kv namespace create TENANTS_KV
   "kv_namespaces": [
