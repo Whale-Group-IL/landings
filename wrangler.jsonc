@@ -33,7 +33,7 @@
   "vars": {
     // Default CRM webhook — can be overridden per tenant in KV config
     "CRM_WEBHOOK_URL": "https://YOUR_WHALEBIZCRM_URL/api/leads",
-    "NEXT_PUBLIC_BASE_URL": "https://landings.whaledigital.co.il"
+    "NEXT_PUBLIC_BASE_URL": "https://whalemarket.co.il"
   },
   "env": {
     "preview": {
