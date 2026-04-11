@@ -3,7 +3,7 @@
   "mode": "bullet",
   "meta": {
     "title": "PAGE TITLE | Your Brand",
-    "description": "Short SEO and Open Graph description (150–160 chars). What you do and for whom.",
+    "description": "Short SEO and Open Graph description (150-160 chars). What you do and for whom.",
     "keywords": "keyword, another one, niche query",
     "lang": "en",
     "dir": "ltr"
@@ -32,7 +32,7 @@
   },
   "blocks": {
     "hero": {
-      "headline": "HEADLINE — one strong promise",
+      "headline": "HEADLINE - one strong promise",
       "subheadline": "Clarifying line: who you help, what result, in how long or at what cost.",
       "ctaText": "I want results →",
       "badge": "Trust badge: «50+ clients» or «Since 2018»"
@@ -60,7 +60,7 @@
     },
     "finalCta": {
       "headline": "Ready to get started?",
-      "subheadline": "Leave your details — we'll get back to you within an hour.",
+      "subheadline": "Leave your details - we'll get back to you within an hour.",
       "ctaText": "Get started",
       "note": "No commitment. First consultation is free."
     }

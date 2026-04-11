@@ -59,9 +59,9 @@ export function PricingBlock({ data, cta, theme }: Props) {
                   <span className="text-2xl font-extrabold leading-tight">{plan.price}</span>
                   {plan.period && (
                     <span
-                      className={`text-sm ms-1 ${plan.highlighted ? 'text-white/60' : 'text-gray-400'}`}
+                      className={`block text-sm mt-1 ${plan.highlighted ? 'text-white/60' : 'text-gray-400'}`}
                     >
-                      /{plan.period}
+                      ({plan.period})
                     </span>
                   )}
                 </div>

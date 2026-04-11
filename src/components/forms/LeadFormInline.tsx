@@ -145,10 +145,10 @@ function LeadForm({ ctaText, crm, tenantId, theme, strings, variant }: LeadFormP
   }
 
   return (
-    <div className="w-full max-w-lg">
+    <div className="w-full max-w-sm">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col sm:flex-row gap-2.5"
+        className="flex flex-col gap-3"
       >
         <input
           type="text"
